@@ -1,0 +1,67 @@
+get utilizado para receber
+post para inserir
+put alterar
+
+response 1xx -> informação
+response 2xx -> sucesso
+response 3xx -> redirecionado
+response 4xx -> erro cliente , pedindo algo que não tem
+response 5xx -> servidor caiu
+
+
+AwesomeAPI , valor do dolar a cada 30seg(API)
+----------------
+
+pip install requests
+pip install backoff
+import requests
+
+url = ''
+ret = requests.get(url)
+ret.text -> para ver o html puro
+
+
+--------
+if ret:
+    print(ret)
+else:
+    print('Falhou')
+# %%
+cotacao = json.loads(ret.text)
+# %%
+cotacao
+# %%
+cotacao = json.loads(ret.text)['USDBRL']
+cotacao
+# %%
+cotacao['bid']
+# %%
+print(f" 20 Dólares, hoje custam {float(cotacao['bid']) * 20} Reais. ")
+# %%
+
+def calculo(valor, moeda):
+    url = f'''https://economia.awesomeapi.com.br/last/{moeda}'''
+    ret = requests.get(url)
+    dolar = json.loads(ret.text)[moeda.replace('-', '')]
+    print(
+        f" {valor} {moeda[:3]}, hoje custam {float(dolar['bid']) * valor} {moeda[-3:]}. ")
+# %%
+calculo(20, 'USD-BRL')
+# %%
+try:
+    calculo(20, 'USD-BRL')
+except:
+    pass
+# %%
+
+try:
+    calculo(20, 'USD-BasL')
+except Exception as e:
+    print(e)
+else:
+    print("ok")
+
+
+
+
+

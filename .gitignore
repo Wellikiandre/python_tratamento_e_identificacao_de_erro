@@ -1,0 +1,11 @@
+#Ignorar ambiente  virtual
+.venv/*
+#Rascunho
+resumo.txt
+request.txt
+#Código dos projetos
+projeto/*
+#Dados
+dados/*
+#Ignorar docker docker compose
+.db/*
